@@ -1,4 +1,4 @@
-# This .gitignore file should be placed at the root of your Unity project directory
+text# This .gitignore file should be placed at the root of your Unity project directory
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
