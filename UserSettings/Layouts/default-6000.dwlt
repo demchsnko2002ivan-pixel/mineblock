@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1533.6
     height: 764.8
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 80
+  controlID: 40
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 81
+  controlID: 41
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 82
+  controlID: 42
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 83
+  controlID: 43
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -299,8 +299,8 @@ MonoBehaviour:
     y: 0
     width: 359.19995
     height: 708.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -717,12 +717,15 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      scrollPos: {x: 0, y: 30.200012}
+      m_SelectedIDs:
+      - m_Data: 58724
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1416
+      - m_Data: -119298
+      - m_Data: -117636
+      - m_Data: -116300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1372,9 +1375,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 24.504248, y: 5.6251903, z: 67.81006}
+    m_Target: {x: 21.69454, y: 10.6323, z: 61.822906}
     speed: 2
-    m_Value: {x: 24.504248, y: 5.6251903, z: 67.81006}
+    m_Value: {x: 21.69454, y: 10.6323, z: 61.822906}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1421,9 +1424,9 @@ MonoBehaviour:
     m_gridOpacity: 0.5
     m_NearestPlaneToHandleMode: 0
   m_Rotation:
-    m_Target: {x: 0.4767723, y: -0.0370337, z: 0.019936722, w: 0.8781349}
+    m_Target: {x: 0.36396658, y: 0.022235898, z: -0.008846908, w: 0.9312144}
     speed: 2
-    m_Value: {x: 0.47672424, y: -0.037029967, z: 0.019934712, w: 0.87804633}
+    m_Value: {x: 0.36391848, y: 0.023350934, z: -0.009282705, w: 0.9310918}
   m_Size:
     m_Target: 0.24547091
     speed: 2
@@ -1510,7 +1513,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1520,23 +1523,21 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: 64
-  m_LastProjectPath: "C:\\Users\\Demch\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439
-    \u0441\u0442\u043E\u043B\\Unity\\Mineblock"
+  m_LastProjectPath: C:\Users\Demch\OneDrive\Documents\UnityProjects\mineblock
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 138}
     m_SelectedIDs:
-    - m_Data: 54312
+    - m_Data: 92212
     m_LastClickedID:
-      m_Data: 54312
+      m_Data: 92212
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 54314
-    - m_Data: 54490
+    - m_Data: 92180
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1569,10 +1570,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs:
-    - m_Data: 0
-    - m_Data: 54312
-    - m_Data: 54314
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1600,10 +1598,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
+    m_SelectedInstanceIDs:
+    - m_Data: 58724
     m_LastClickedEntityId:
-      m_Data: 0
-    m_HadKeyboardFocusLastEvent: 0
+      m_Data: 58724
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 58732
     m_RenameOverlay:
