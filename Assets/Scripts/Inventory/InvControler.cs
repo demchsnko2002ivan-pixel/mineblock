@@ -27,6 +27,7 @@ public class InvControler : MonoBehaviour
                 PricelFollow.Instance.Disable();
                 Cursor.visible = false;
                 PlayerAttackHandler.Instance.EnableDisableAttacking(true);
+                PlayerController.Instance.EnableDisableAttacking(true);
                 MouseLook.Instance.EnableRotate(true);
             }
             else
@@ -38,6 +39,7 @@ public class InvControler : MonoBehaviour
                 PricelFollow.Instance.Enable();
                 Cursor.visible = false;
                 PlayerAttackHandler.Instance.EnableDisableAttacking(false);
+                PlayerController.Instance.EnableDisableAttacking(false);
                 MouseLook.Instance.EnableRotate(false);
             }
         }

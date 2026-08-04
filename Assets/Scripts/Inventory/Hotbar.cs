@@ -67,6 +67,11 @@ public class Hotbar : MonoBehaviour
             {
                 Transform refRight, refLeft;
 
+                if (activeTool != null && activeTool != slot.physicalTool)
+                {
+                    activeTool.SetActive(false);
+                }
+
                 if (slot.physicalTool == null)
                 {
                     activeTool = Instantiate(slot.currentTool.GetComponent<ItemController>().item.prefab, toolParent);
@@ -80,8 +85,9 @@ public class Hotbar : MonoBehaviour
                 }
                 else
                 {
-                    slot.physicalTool.SetActive(true);
-                    tool = slot.physicalTool.GetComponent<Tool>();
+                    activeTool = slot.physicalTool;
+                    activeTool.SetActive(true);
+                    tool = activeTool.GetComponent<Tool>();
                     Debug.Log("2" + tool);
                     activeTool.transform.localPosition = tool.GetHandPosition();
                     activeTool.transform.localEulerAngles = tool.GetHandRotation();
@@ -103,7 +109,10 @@ public class Hotbar : MonoBehaviour
             rightIK.data.target = null;
             leftIK.data.target = null;
             if (activeTool != null)
+            {
                activeTool.SetActive(false);
+               activeTool = null;
+            }
             rigBuilder.Build();
             DisableSelection(slot);
         }

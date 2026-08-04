@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemController : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class ItemController : MonoBehaviour
         if (ic.container != null && container != null)
         {
             container.count += ic.container.count;
+            Debug.Log("New Count: " + container.count);
         }
         else
         {
@@ -60,5 +62,16 @@ public class ItemController : MonoBehaviour
     public void Select(bool selected)
     {
 
+    }
+    public void UpdateUI()
+    {
+        if (container != null)
+        {
+            var itemStack = transform.Find("Stack")?.GetComponent<TextMeshProUGUI>();
+            if (itemStack != null)
+            {
+                itemStack.text = "" + container.count;
+            }
+        }
     }
 }
