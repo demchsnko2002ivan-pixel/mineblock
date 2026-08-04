@@ -35,3 +35,4 @@ text# This .gitignore file should be placed at the root of your Unity project di
 Thumbs.db
 /Logs
 *.log
+*.log
