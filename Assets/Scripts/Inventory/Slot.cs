@@ -20,14 +20,14 @@ public class Slot : MonoBehaviour, IDropHandler
             var droppedItem = draggedRect.GetComponent<ItemController>();
 
             var otherIc = droppedItem;
-            if (item != null && ic != null)
+            if (item != null && ic != null && otherIc != null && ic != otherIc)
             if (item == otherIc.item)
             {
-                Debug.Log("Item Stacked");
+                Debug.Log("Item Stacked + " +otherIc.container.count);
                 ic.AddItemStack(otherIc);
-                InventoryManager.Instance.RemoveContainer(otherIc.container);
+                InventoryManager.Instance.RemoveContainer(otherIc.container, false);
                 Destroy(otherIc.gameObject);
-                InventoryManager.Instance.ListItems();
+                ic.UpdateUI();
                 return;
             }
 
@@ -45,11 +45,14 @@ public class Slot : MonoBehaviour, IDropHandler
             }
         }
         ic = null;
+        item = null;
+        currentTool = null;
     }
     public void SetItemController(ItemController controller)
     {
         ic = controller;
         item = controller.item;
+        currentTool = controller.gameObject;
     }
     public void PlaceItem(RectTransform rt)
     {

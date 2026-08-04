@@ -51,7 +51,7 @@ public class PlayerAttackHandler : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && !isAttacking) // Левая кнопка мыши
             {
-                _animator.SetTrigger("attack"); // Переход в состояние Standing Melee Kick
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); if (Physics.Raycast(ray, out RaycastHit hit, 5f)) { if (hit.collider.GetComponent<ItemPickup>() != null) { return; } } _animator.SetTrigger("attack"); // Переход в состояние Standing Melee Kick
 
                 if (Hotbar.Instance.activeTool != null)
                 {

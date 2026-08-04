@@ -90,9 +90,9 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    public void RemoveContainer(ItemContainer container)
+    public void RemoveContainer(ItemContainer container, bool decrementDictionary = true)
     {
-        if (container != null && container.currentItem != null)
+        if (decrementDictionary && container != null && container.currentItem != null)
         {
             if (itemDictionary.ContainsKey(container.currentItem))
             {
@@ -106,6 +106,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+
         if (container != null)
         {
             items.Remove(container);
@@ -148,6 +149,8 @@ public class InventoryManager : MonoBehaviour
 
             itemController.prefab = item.prefab;
             itemController.item = item;
+            itemController.AddItem(item);
+            itemController.SetContainer(container);
 
             Debug.Log(item.itemName + " " + container.count);
 
@@ -177,14 +180,6 @@ public class InventoryManager : MonoBehaviour
     public void SetInventoryItems()
     {
         inventoryItems = itemContent.GetComponentsInChildren<ItemController>();
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (i < inventoryItems.Length)
-            {
-                inventoryItems[i].AddItem(items[i].currentItem);
-                inventoryItems[i].SetContainer(items[i]);
-            }
-        }
     }
 
     public void CraftItem(CraftRecipe recipe)
