@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
             _moveDirection = transform.TransformDirection(_moveDirection);
             bool isCrouching = false;
 
-            // Определение скорости
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (Input.GetKey(KeyCode.LeftShift) && _localMoveDirection == Vector3.forward)
             {
                 _moveDirection *= runningSpeed;
@@ -123,48 +123,48 @@ public class PlayerController : MonoBehaviour
             {
                 _moveDirection *= walkingSpeed;
             }
-            // Прыжок
+            // пїЅпїЅпїЅпїЅпїЅпїЅ
             if (Input.GetButtonDown("Jump"))
             {
                 Debug.Log("Jumped");
                 // _characterController.SimpleMove(Vector3.up*jumpForce);
-                _animator.SetTrigger("jump"); // Переход в состояние Jumping Up
+                _animator.SetTrigger("jump"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Jumping Up
                 StartCoroutine(HandleJumps());
             }
         }
 
-        // Применение гравитации
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _moveDirection.y -= gravity * Time.deltaTime;
 
-        // Движение персонажа
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _characterController.Move(_moveDirection * Time.deltaTime);
     }
     private bool IsGrounded()
     {
-        return Physics.CheckSphere(transform.position, 0.2f, layerMask);
+        return Physics.CheckSphere(gc.transform.position, 0.2f, layerMask);
     }
     private void Log()
     {
-        //Debug.Log(IsGrounded());
+         Debug.Log(IsGrounded());
     }
     private void HandleAnimations()
     {
-        // Получаем значения осей
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Передаем параметры в Blend Tree
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Blend Tree
         _animator.SetFloat("horSpeed", horizontalInput);
         _animator.SetFloat("vertSpeed", verticalInput);
 
         _animator.SetBool("forward", (horizontalInput > 0.1 || horizontalInput < -0.1 || verticalInput > 0.1) && !(verticalInput < -0.1));
 
-        // Условие для перехода в Run
-        // Этот код предполагает, что вы хотите бегать только вперед.
-        // Если вам нужно бегать в других направлениях, Blend Tree тоже поможет.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Run
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, Blend Tree пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         _animator.SetBool("run", Input.GetKey(KeyCode.LeftShift) && verticalInput > 0 && horizontalInput == 0);
 
-        // Условие для перехода из Jumping Up обратно в Idle, Walking или Run
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Jumping Up пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Idle, Walking пїЅпїЅпїЅ Run
         _animator.SetBool("isGrounded", IsGrounded());
 
         _animator.SetBool("crouching", Input.GetKey(KeyCode.LeftControl));
@@ -189,9 +189,9 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack)
         {
-            if (Input.GetMouseButtonDown(0) && !isAttacking) // Левая кнопка мыши
+            if (Input.GetMouseButtonDown(0) && !isAttacking) // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); if (Physics.Raycast(ray, out RaycastHit hit, 5f)) { if (hit.collider.GetComponent<ItemPickup>() != null) { return; } } _animator.SetTrigger("attack"); // Переход в состояние Standing Melee Kick
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); if (Physics.Raycast(ray, out RaycastHit hit, 5f)) { if (hit.collider.GetComponent<ItemPickup>() != null) { return; } } _animator.SetTrigger("attack"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Standing Melee Kick
                 HandleAnimLayers(0, false);
                 HandleAnimLayers(1, true);
                 StartCoroutine(AttackDelay());
