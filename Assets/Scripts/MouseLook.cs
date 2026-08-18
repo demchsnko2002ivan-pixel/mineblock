@@ -10,6 +10,12 @@ public class MouseLook : MonoBehaviour
     Transform playerBody;
     [SerializeField]
     float mouseSensitivity = 100f;
+    [SerializeField]
+    float minXAngle = -80f;
+    [SerializeField]
+    float maxXAngle = 80f;
+    [SerializeField]
+    float maxYSpeed = 10f;
     [SerializeField] Transform spine1;
     [SerializeField] Transform spine2;
     [SerializeField] Transform neck;
@@ -53,14 +59,17 @@ public class MouseLook : MonoBehaviour
             _mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
             _xRotation -= _mouseY;
-            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+            _xRotation = Mathf.Clamp(_xRotation, minXAngle, maxXAngle);
+            _mouseX = Mathf.Clamp(_mouseX, -maxYSpeed, maxYSpeed);
             playerBody.Rotate(Vector3.up * _mouseX);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, playerBody.eulerAngles.y, 0);
+            
+            transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
             spine1.localRotation = Quaternion.Euler(spine1StartRotation + _xRotation / 3, spine1.localEulerAngles.y, spine1.localEulerAngles.z);
             spine2.localRotation = Quaternion.Euler(spine2StartRotation + _xRotation / 3, spine2.localEulerAngles.y, spine2.localEulerAngles.z);
             neck.localRotation = Quaternion.Euler(neckStartRotation + _xRotation / 3, neck.localEulerAngles.y, neck.localEulerAngles.z);
             rightShoulder.localRotation = Quaternion.Euler(rightShoulder.localEulerAngles.x, rightShoulder.localEulerAngles.y, rightShoulderStartRotation - _xRotation / 3);
             leftShoulder.localRotation = Quaternion.Euler(leftShoulder.localEulerAngles.x, leftShoulder.localEulerAngles.y, leftShoulderStartRotation + _xRotation / 3);
+            
             // Debug.Log(transform.eulerAngles.x);
         }
     }
