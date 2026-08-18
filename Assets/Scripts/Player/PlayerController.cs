@@ -31,11 +31,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Unity links")]
     [SerializeField]
-    GroundCheck gc;
-    [SerializeField]
     private Transform maincamer;
-    [SerializeField]
-    private LayerMask layerMask;
 
     private Vector3 _moveDirection = Vector3.zero;
     [SerializeField]
@@ -141,11 +137,11 @@ public class PlayerController : MonoBehaviour
     }
     private bool IsGrounded()
     {
-        return Physics.CheckSphere(gc.transform.position, 0.2f, layerMask);
+        return _characterController != null && _characterController.isGrounded;
     }
     private void Log()
     {
-         Debug.Log(IsGrounded());
+         Debug.Log("grounded" + IsGrounded());
     }
     private void HandleAnimations()
     {
