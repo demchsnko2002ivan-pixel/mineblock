@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -60,41 +60,44 @@ public class CraftManager : MonoBehaviour
     }
     private List<ItemRecipe> ShowRecipes(CraftRecipe.Section section)
     {
-        // Очистка старых рецептов
-        ItemRecipe[] lastRecipes = recipeParent.transform.GetComponentsInChildren<ItemRecipe>();
-        List<ItemRecipe> activeRecipes = new List<ItemRecipe>();
-        foreach (ItemRecipe obj in lastRecipes)
+        // Destroy previous recipe items using DestroyImmediate-safe pattern
+        foreach (ItemRecipe recipe in activeRecipes)
         {
-            Destroy(obj.gameObject);
+            if (recipe != null)
+            {
+                Destroy(recipe.gameObject);
+            }
         }
+        activeRecipes.Clear();
 
+        List<CraftRecipe> recipes;
         if (section == CraftRecipe.Section.Everything)
         {
-            List<CraftRecipe> allRecipes = database.GetAllRecipes();
-            foreach (CraftRecipe recipe in allRecipes)
-            {
-                GameObject obj = Instantiate(recipePrefab, recipeParent.transform);
-                ItemRecipe item = obj.transform.GetComponent<ItemRecipe>();
-                item.SetRecipe(recipe);
-                activeRecipes.Add(item);
-            }
-            return activeRecipes;
+            recipes = database.GetAllRecipes();
         }
-        List<CraftRecipe> recipes = database.GetRecipesPerSection(section);
+        else
+        {
+            recipes = database.GetRecipesPerSection(section);
+        }
+
+        List<ItemRecipe> newRecipes = new List<ItemRecipe>();
         foreach (CraftRecipe recipe in recipes)
         {
             GameObject obj = Instantiate(recipePrefab, recipeParent.transform);
             ItemRecipe item = obj.transform.GetComponent<ItemRecipe>();
             item.SetRecipe(recipe);
-            activeRecipes.Add(item);
-        } 
-        return activeRecipes;
+            newRecipes.Add(item);
+        }
+        return newRecipes;
     }
     public void UpdateRecipes()
     {
         foreach (var recipe in activeRecipes)
         {
-            recipe.UpdateRecipe();
+            if (recipe != null)
+            {
+                recipe.UpdateRecipe();
+            }
         }
     }
 }

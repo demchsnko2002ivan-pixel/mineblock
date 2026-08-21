@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -30,7 +30,10 @@ public class ItemRecipe : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        UpdateRecipe();
+        if (recipeInfo.activeSelf)
+        {
+            UpdateRecipe();
+        }
     }
     public void HandleButtonClick()
     {
@@ -46,13 +49,7 @@ public class ItemRecipe : MonoBehaviour
     public void ShowRecipe()
     {
         recipeInfo.SetActive(true);
-        // Чистка списка ингредиентов
-        RecipeIngredient[] lastIngredients = ingredientParent.transform.GetComponentsInChildren<RecipeIngredient>();
-        foreach (RecipeIngredient obj in lastIngredients)
-        {
-            Destroy(obj.gameObject);
-        }
-        // Спавним новые ингредиенты
+        ClearIngredients();
         foreach (Ingredient ingredient in craftRecipe.ingredients)
         {
             GameObject obj = Instantiate(ingredientPrefab, ingredientParent.transform);
@@ -67,12 +64,27 @@ public class ItemRecipe : MonoBehaviour
     {
         foreach (var ingredient in ingredients)
         {
-            ingredient.LackUpdate();
+            if (ingredient != null)
+            {
+                ingredient.LackUpdate();
+            }
         }
     }
     public void HideRecipe()
     {
+        ClearIngredients();
         recipeInfo.SetActive(false);
+    }
+    private void ClearIngredients()
+    {
+        foreach (var ingredient in ingredients)
+        {
+            if (ingredient != null)
+            {
+                Destroy(ingredient.gameObject);
+            }
+        }
+        ingredients.Clear();
     }
     public void SetRecipe(CraftRecipe craftRecipe)
     {
@@ -84,6 +96,10 @@ public class ItemRecipe : MonoBehaviour
     {
         foreach (var ingredient in ingredients)
         {
+            if (ingredient == null)
+            {
+                return false;
+            }
             if (ingredient.IsContains() == false)
             {
                 return false;
