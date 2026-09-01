@@ -18,6 +18,8 @@ public class Hotbar : MonoBehaviour
     [SerializeField] RigBuilder rigBuilder;
     [SerializeField] Transform toolParent;
     public GameObject activeTool;
+    public Slot selectedSlot;
+
     void Awake()
     {
         if (Instance == null)
@@ -29,6 +31,7 @@ public class Hotbar : MonoBehaviour
             Destroy(this);
         }
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -38,32 +41,37 @@ public class Hotbar : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SelectItem(slot2);
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SelectItem(slot3);
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             SelectItem(slot4);
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             SelectItem(slot5);
         }
     }
-    private void SelectItem(Slot slot)
+
+    public void SelectItem(Slot slot)
     {
-        if (slot.currentTool != null)
+        selectedSlot = slot;
+
+        if (slot != null && slot.currentTool != null)
         {
-            Debug.Log("SelectItem" + slot.currentTool.name);
-            slot.currentTool.GetComponent<ItemController>().Select(true);
+            Debug.Log("SelectItem " + slot.currentTool.name);
+            ItemController itemController = slot.currentTool.GetComponent<ItemController>();
+            if (itemController != null)
+            {
+                itemController.Select(true);
+            }
             DisableSelection(slot);
-            Tool tool;
-            if (slot.currentTool.GetComponent<ItemController>().item.prefab.transform.TryGetComponent<Tool>(out tool))
+
+            Tool tool = null;
+            if (itemController != null && itemController.item != null && itemController.item.prefab != null && itemController.item.prefab.transform.TryGetComponent<Tool>(out tool))
             {
                 Transform refRight, refLeft;
 
@@ -74,7 +82,7 @@ public class Hotbar : MonoBehaviour
 
                 if (slot.physicalTool == null)
                 {
-                    activeTool = Instantiate(slot.currentTool.GetComponent<ItemController>().item.prefab, toolParent);
+                    activeTool = Instantiate(itemController.item.prefab, toolParent);
                     slot.physicalTool = activeTool;
                     foreach (var rb in activeTool.GetComponentsInChildren<Rigidbody>())
                     {
@@ -87,57 +95,96 @@ public class Hotbar : MonoBehaviour
                     activeTool.transform.localPosition = tool.GetHandPosition();
                     activeTool.transform.localEulerAngles = tool.GetHandRotation();
                     tool = activeTool.GetComponent<Tool>();
-                    Debug.Log("1" + activeTool);
                 }
                 else
                 {
                     activeTool = slot.physicalTool;
                     activeTool.SetActive(true);
                     tool = activeTool.GetComponent<Tool>();
-                    Debug.Log("2" + tool);
                     activeTool.transform.localPosition = tool.GetHandPosition();
                     activeTool.transform.localEulerAngles = tool.GetHandRotation();
                 }
+
                 tool.GetReferences(out refLeft, out refRight);
-                if (refRight != null)
+                if (refRight != null && rightIK != null)
                 {
                     rightIK.data.target = refRight;
                     rightIK.weight = 1f;
                 }
-                if (refLeft != null)
+                if (refLeft != null && leftIK != null)
                 {
                     leftIK.data.target = refLeft;
                     leftIK.weight = 1f;
                 }
             }
+            else
+            {
+                ClearActiveTool();
+            }
         }
         else
         {
-            rightIK.weight = 0f;
-            leftIK.weight = 0f;
-            if (activeTool != null)
-            {
-               activeTool.SetActive(false);
-               activeTool = null;
-            }
+            ClearActiveTool();
             DisableSelection(slot);
         }
     }
+
+    public bool IsSlotSelected(Slot slot)
+    {
+        return selectedSlot != null && selectedSlot == slot;
+    }
+
+    public void RefreshSelectedSlot()
+    {
+        if (selectedSlot != null)
+        {
+            SelectItem(selectedSlot);
+        }
+    }
+
+    public void ClearActiveTool()
+    {
+        if (rightIK != null)
+        {
+            rightIK.weight = 0f;
+        }
+        if (leftIK != null)
+        {
+            leftIK.weight = 0f;
+        }
+        if (activeTool != null)
+        {
+            activeTool.SetActive(false);
+            activeTool = null;
+        }
+    }
+
     public void AlignActiveTool()
     {
-        activeTool.transform.localPosition = activeTool.transform.GetComponent<Tool>().GetHandPosition();
-        activeTool.transform.localEulerAngles = activeTool.transform.GetComponent<Tool>().GetHandRotation();
+        if (activeTool != null)
+        {
+            Tool tool = activeTool.GetComponent<Tool>();
+            if (tool != null)
+            {
+                activeTool.transform.localPosition = tool.GetHandPosition();
+                activeTool.transform.localEulerAngles = tool.GetHandRotation();
+            }
+        }
     }
+
     private void DisableSelection(Slot activeSlot)
     {
         Slot[] slots = { slot1, slot2, slot3, slot4, slot5 };
         foreach (Slot slot in slots)
         {
-            if (slot != activeSlot && slot.currentTool != null)
+            if (slot != null && slot != activeSlot && slot.currentTool != null)
             {
-                slot.currentTool.GetComponent<ItemController>().Select(false);
+                ItemController itemController = slot.currentTool.GetComponent<ItemController>();
+                if (itemController != null)
+                {
+                    itemController.Select(false);
+                }
             }
         }
-
     }
 }

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 public class InvItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -11,8 +9,9 @@ public class InvItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Transform originalParent;
+    public Transform originalParent { get; private set; }
     private ScrollRect parentScrollRect;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -24,6 +23,7 @@ public class InvItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         canvas = GetComponentInParent<Canvas>();
         parentScrollRect = GetComponentInParent<ScrollRect>();
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 0.6f;
@@ -35,10 +35,12 @@ public class InvItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             parentScrollRect.enabled = false;
         }
     }
+
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
+
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1;
@@ -48,22 +50,34 @@ public class InvItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             parentScrollRect.enabled = true;
         }
         ResetPosition();
+
         if (transform.parent == canvas.transform)
         {
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
         }
+
         var objectList = eventData.hovered;
         foreach (GameObject obj in objectList)
         {
             Debug.Log(obj.name);
         }
-        //Debug.Log("Object Count " + objectList.Count);
+
         if (objectList.Count == 0)
         {
+            Slot originalSlot = originalParent != null ? originalParent.GetComponent<Slot>() : null;
+            if (originalSlot != null)
+            {
+                originalSlot.ClearSlotData();
+                if (Hotbar.Instance != null && Hotbar.Instance.IsSlotSelected(originalSlot))
+                {
+                    Hotbar.Instance.RefreshSelectedSlot();
+                }
+            }
             GetComponent<ItemController>().DropItem();
         }
     }
+
     private void ResetPosition()
     {
         rectTransform.localPosition = Vector3.zero;
