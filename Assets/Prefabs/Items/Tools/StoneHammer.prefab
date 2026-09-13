@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8256334219787640818}
   m_Layer: 0
   m_Name: StoneHammer
-  m_TagString: Untagged
+  m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,9 +87,10 @@ MonoBehaviour:
   handPosition: {x: 0.252, y: 1.049, z: -0.013}
   handRotation: {x: 331.78403, y: 72.27, z: 38.28}
   throwable: 0
-  canGather: 0
-  contactOffset: {x: 0, y: 0.4, z: 0}
+  canGather: 6
+  contactOffset: {x: -0.005, y: 0.4, z: 0}
   contactRadius: 0.1
+  canDamage: 1
 --- !u!65 &6800285052917851740
 BoxCollider:
   m_ObjectHideFlags: 0

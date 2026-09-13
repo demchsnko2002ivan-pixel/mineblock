@@ -21,6 +21,7 @@ public class Tool : MonoBehaviour
     
     [SerializeField] Vector3 contactOffset;
     [SerializeField] float contactRadius = 0.1f;
+    [SerializeField] public bool canDamage = true;
     public enum HoldingType
     {
         rightHand, leftHand, bothHands
@@ -49,19 +50,20 @@ public class Tool : MonoBehaviour
     }
     private void Attack()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.TransformPoint(contactOffset), contactRadius);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Gatherable"))
-            {
-                Health health = collider.GetComponent<Health>();
-                if (health.gatherable.HasFlag(canGather))
-                {
-                    health.TakeDamage(damage);
-                    Debug.Log("Hit");
-                }
-            }
-        }
+        canDamage = true;
+        //Collider[] colliders = Physics.OverlapSphere(transform.TransformPoint(contactOffset), contactRadius);
+        //foreach (Collider collider in colliders)
+        //{
+        //    if (collider.CompareTag("Gatherable"))
+        //    {
+        //        Health health = collider.GetComponent<Health>();
+        //        if (health.gatherable.HasFlag(canGather))
+        //        {
+        //            health.TakeDamage(damage);
+        //            Debug.Log("Hit");
+        //        }
+        //    }
+        //}
     }
     private void OnDrawGizmosSelected()
     {

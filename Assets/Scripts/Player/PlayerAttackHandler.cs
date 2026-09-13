@@ -60,6 +60,10 @@ public class PlayerAttackHandler : MonoBehaviour
                     HandleHandsIK(false);
                     StartCoroutine(AttackDelay());
                     isAttacking = true;
+                    if (OnAttack != null)
+                    {
+                        OnAttack.Invoke();
+                    }
                 }
             }
         }
@@ -77,8 +81,11 @@ public class PlayerAttackHandler : MonoBehaviour
             Hotbar.Instance.activeTool.transform.SetParent(toolHolder);
             isAttacking = false;
             Tool tool = Hotbar.Instance.activeTool.GetComponent<Tool>();
-            Hotbar.Instance.activeTool.transform.localPosition = tool.GetHandPosition();
-            Hotbar.Instance.activeTool.transform.localEulerAngles = tool.GetHandRotation();
+            if (tool != null)
+            {
+                Hotbar.Instance.activeTool.transform.localPosition = tool.GetHandPosition();
+                Hotbar.Instance.activeTool.transform.localEulerAngles = tool.GetHandRotation();
+            }
         }
         else
         {

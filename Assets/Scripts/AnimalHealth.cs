@@ -17,7 +17,7 @@ public class AnimalHealth : Health
         base.TakeDamage(damage);
         ai.RunAway();
     }
-    override protected void Death()
+    override public void Death()
     {
         NavMeshAgent agent;
         if (TryGetComponent<NavMeshAgent>(out agent))

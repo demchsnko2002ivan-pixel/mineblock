@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2391661303688110362}
   m_Layer: 0
   m_Name: StoneAxe
-  m_TagString: Untagged
+  m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,9 +56,10 @@ MonoBehaviour:
   handPosition: {x: 0.244, y: 0.764, z: 0.04}
   handRotation: {x: 10.6090765, y: 273.25485, z: 339.1435}
   throwable: 0
-  canGather: 0
-  contactOffset: {x: 0, y: 0.47, z: 0.05}
+  canGather: -1
+  contactOffset: {x: 0.1, y: 0.47, z: 0}
   contactRadius: 0.13
+  canDamage: 1
 --- !u!65 &5240567700859611758
 BoxCollider:
   m_ObjectHideFlags: 0

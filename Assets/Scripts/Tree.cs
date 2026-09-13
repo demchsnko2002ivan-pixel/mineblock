@@ -14,7 +14,7 @@ public class Tree : Health
         animator = GetComponent<Animator>();
         base.Start();
     }
-    protected override void Death()
+    public override void Death()
     {
         animator.SetTrigger("fall");
         Destroy(gameObject, 1f);
