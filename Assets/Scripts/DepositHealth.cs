@@ -4,6 +4,8 @@ public class DepositHealth : Health
 {
     [SerializeField]
     private GameObject droppedItem;
+    [SerializeField] GameObject particle;
+    [SerializeField] GameObject breakParticle;
 
     // Update is called once per frame
     void Update()
@@ -15,9 +17,11 @@ public class DepositHealth : Health
         // Example: Check if the object entering has the "Player" tag
         if (other.CompareTag("Tool"))
         {
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
             Tool tool = other.GetComponent<Tool>();
             if (tool.canDamage)
             {
+                Instantiate(particle, hitPoint, Quaternion.identity);
                 TakeDamage(20);
                 Debug.Log(curHealth);
                 Debug.Log("Damaged" + " " + other.gameObject.name);
@@ -27,21 +31,18 @@ public class DepositHealth : Health
     }
     public override void Death()
     {
+        Instantiate(breakParticle, transform.position, Quaternion.identity);
         base.Death();
         int dropCount = Random.Range(3, 7);
         Drop(dropCount);
     }
     void Drop(int amount)
     {
-        float range = 0.3f;
-        Vector3 offset = new Vector3(
-    Random.Range(-range, range),
-    0,
-    Random.Range(-range, range)
-);
+        float range = 0.6f;
 
         for (int i = 0; i < amount; i++)
         {
+            Vector3 offset = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
             Instantiate(droppedItem, transform.position + offset, Quaternion.identity);
         }
         Destroy(gameObject);

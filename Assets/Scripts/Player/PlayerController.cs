@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Log()
     {
-         Debug.Log("grounded" + IsGrounded());
+         //Debug.Log("grounded" + IsGrounded());
     }
     private void HandleAnimations()
     {

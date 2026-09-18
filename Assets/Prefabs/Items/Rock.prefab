@@ -94,6 +94,7 @@ MonoBehaviour:
   canGather: 0
   contactOffset: {x: -0.04, y: 0.1, z: 0.03}
   contactRadius: 0.1
+  canDamage: 1
 --- !u!205 &8387729503606520541
 LODGroup:
   m_ObjectHideFlags: 0
