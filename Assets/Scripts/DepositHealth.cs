@@ -47,8 +47,4 @@ public class DepositHealth : Health
         }
         Destroy(gameObject);
     }
-    //override public void Death()
-    //{
-    //Debug.Log("Dead");
-    //}
 }
