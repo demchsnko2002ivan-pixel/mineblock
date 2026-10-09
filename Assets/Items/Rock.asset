@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Rock
   value: 0
   icon: {fileID: 21300000, guid: ea58f3aa1ee754641895dd91da76a7bc, type: 3}
-  prefab: {fileID: 4140774597986965270, guid: 02d5140fb9b70ae428d5c2dcbc355a85, type: 3}
+  prefab: {fileID: 4140774597986965270, guid: 2f8493f7e5ef50041a8b07514936109a, type: 3}
   stack: 6

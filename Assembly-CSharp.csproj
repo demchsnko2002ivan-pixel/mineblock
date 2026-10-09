@@ -65,7 +65,9 @@
     <Compile Include="Assets\Scripts\Inventory\ToolControler.cs" />
     <Compile Include="Assets\Scripts\Inventory\RecipeIngredient.cs" />
     <Compile Include="Assets\WeaponsAndPropsAssetPack_NAS\Scripts\Breakable.cs" />
+    <Compile Include="Assets\Scripts\Campfire.cs" />
     <Compile Include="Assets\Scripts\HeightMapGenerator.cs" />
+    <Compile Include="Assets\Scripts\Placeable.cs" />
     <Compile Include="Assets\Scripts\PricelFollow.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemPickup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />

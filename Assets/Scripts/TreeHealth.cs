@@ -16,6 +16,7 @@ public class TreeHealth : Health
     protected override void Start()
     {
         animator = GetComponent<Animator>();
+        animator.enabled = false;
         base.Start();
     }
     private void OnTriggerEnter(Collider other)
@@ -42,6 +43,7 @@ public class TreeHealth : Health
         _penyok.transform.localEulerAngles = transform.localEulerAngles;
         //_penyok.transform.SetParent(transform.parent);
         _penyok.transform.localScale = transform.localScale;
+        animator.enabled = true;
         if (animator != null)
         {
             int fall = Random.Range(1, 4);

@@ -67,8 +67,9 @@ public class WorldGeneration : MonoBehaviour
         Vector3 randomPoint;
         if (RandomPointOnNavMesh(transform.position, spawnRadius, out randomPoint))
         {
+            float randomAngle = Random.Range(0f, 360f);
             GameObject obj = Instantiate(prefabs[Random.Range(0, prefabs.Count)], randomPoint, Quaternion.identity);
-            obj.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+            obj.transform.rotation = Quaternion.Euler(0f, randomAngle, 0f);
             obj.transform.SetParent(transform);
         }
     }

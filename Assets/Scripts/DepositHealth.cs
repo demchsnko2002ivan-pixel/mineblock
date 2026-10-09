@@ -1,11 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DepositHealth : Health
 {
-    [SerializeField]
-    private GameObject droppedItem;
+    [SerializeField] GameObject droppedItem;
     [SerializeField] GameObject particle;
     [SerializeField] GameObject breakParticle;
+    [System.Serializable]
+    public struct ObjectData
+    {
+        public GameObject DropObject;
+        public float Chance;
+    }
+    public List<ObjectData> objectDataList = new List<ObjectData>();
 
     // Update is called once per frame
     void Update()
@@ -38,13 +45,23 @@ public class DepositHealth : Health
     }
     void Drop(int amount)
     {
-        float range = 0.6f;
-
         for (int i = 0; i < amount; i++)
         {
-            Vector3 offset = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
-            Instantiate(droppedItem, transform.position + offset, Quaternion.identity);
+            foreach (ObjectData data in objectDataList)
+            {
+                float r = Random.Range(0f, 1f);
+                if (r < data.Chance)
+                {
+                    Drop(data.DropObject);
+                }
+            }
         }
         Destroy(gameObject);
+    }
+    private void Drop(GameObject drop)
+    {
+        float range = 0.6f;
+        Vector3 offset = new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
+        Instantiate(drop, transform.position + offset, Quaternion.identity);
     }
 }
