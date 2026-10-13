@@ -60,29 +60,63 @@ public class Hotbar : MonoBehaviour
     {
         selectedSlot = slot;
 
-        if (slot != null && slot.currentTool != null)
+        ItemController itemController = null;
+        if (slot != null)
         {
-            Debug.Log("SelectItem " + slot.currentTool.name);
-            ItemController itemController = slot.currentTool.GetComponent<ItemController>();
-            if (itemController != null)
+            if (slot.currentTool != null)
             {
-                itemController.Select(true);
+                itemController = slot.currentTool.GetComponent<ItemController>();
             }
+            if (itemController == null)
+            {
+                itemController = slot.ItemController;
+                if (itemController != null)
+                {
+                    slot.currentTool = itemController.gameObject;
+                }
+            }
+        }
+
+        if (slot != null && itemController != null)
+        {
+            Debug.Log("SelectItem " + itemController.name);
+            itemController.Select(true);
             DisableSelection(slot);
 
-            Tool tool = null;
-            if (itemController != null && itemController.item != null && itemController.item.prefab != null && itemController.item.prefab.transform.TryGetComponent<Tool>(out tool))
+            GameObject prefab = null;
+            if (itemController.item != null && itemController.item.prefab != null)
+            {
+                prefab = itemController.item.prefab;
+            }
+            else if (itemController.prefab != null)
+            {
+                prefab = itemController.prefab;
+            }
+            else if (slot.item != null && slot.item.prefab != null)
+            {
+                prefab = slot.item.prefab;
+            }
+
+            Tool tool = prefab != null ? prefab.GetComponentInChildren<Tool>() : null;
+            Placeable placeable = prefab != null ? prefab.GetComponentInChildren<Placeable>() : null;
+
+            if (tool != null)
             {
                 Transform refRight, refLeft;
 
                 if (activeTool != null && activeTool != slot.physicalTool)
                 {
+                    Placeable oldPlaceable = activeTool.GetComponentInChildren<Placeable>();
+                    if (oldPlaceable != null)
+                    {
+                        oldPlaceable.SetPlacingMode(false);
+                    }
                     activeTool.SetActive(false);
                 }
 
                 if (slot.physicalTool == null)
                 {
-                    activeTool = Instantiate(itemController.item.prefab, toolParent);
+                    activeTool = Instantiate(prefab, toolParent);
                     slot.physicalTool = activeTool;
                     foreach (var rb in activeTool.GetComponentsInChildren<Rigidbody>())
                     {
@@ -116,6 +150,50 @@ public class Hotbar : MonoBehaviour
                     leftIK.data.target = refLeft;
                     leftIK.weight = 1f;
                 }
+            }
+            else if (placeable != null)
+            {
+                if (rightIK != null)
+                {
+                    rightIK.weight = 0f;
+                }
+                if (leftIK != null)
+                {
+                    leftIK.weight = 0f;
+                }
+
+                if (activeTool != null && activeTool != slot.physicalTool)
+                {
+                    Placeable oldPlaceable = activeTool.GetComponentInChildren<Placeable>();
+                    if (oldPlaceable != null)
+                    {
+                        oldPlaceable.SetPlacingMode(false);
+                    }
+                    activeTool.SetActive(false);
+                }
+
+                Transform viewer = Camera.main != null ? Camera.main.transform : (PlayerController.Instance != null ? PlayerController.Instance.transform : null);
+                Vector3 spawnPos = viewer != null ? viewer.position + viewer.forward * 3f : Vector3.zero;
+
+                if (slot.physicalTool == null)
+                {
+                    activeTool = Instantiate(prefab, spawnPos, Quaternion.identity);
+                    slot.physicalTool = activeTool;
+                }
+                else
+                {
+                    activeTool = slot.physicalTool;
+                }
+
+                activeTool.SetActive(true);
+
+                Placeable activePlaceable = activeTool.GetComponentInChildren<Placeable>();
+                if (activePlaceable == null)
+                {
+                    activePlaceable = activeTool.AddComponent<Placeable>();
+                }
+
+                activePlaceable.SetPlacingMode(true);
             }
             else
             {
@@ -154,6 +232,11 @@ public class Hotbar : MonoBehaviour
         }
         if (activeTool != null)
         {
+            Placeable placeable = activeTool.GetComponentInChildren<Placeable>();
+            if (placeable != null)
+            {
+                placeable.SetPlacingMode(false);
+            }
             activeTool.SetActive(false);
             activeTool = null;
         }

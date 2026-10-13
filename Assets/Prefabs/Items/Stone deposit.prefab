@@ -118,7 +118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5192799656537503058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.974588, y: 4.0918465, z: 68.34684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -170,9 +170,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   maxHealth: 100
   gatherable: 2
-  droppedItem: {fileID: 4140774597986965270, guid: 2f8493f7e5ef50041a8b07514936109a, type: 3}
+  droppedItem: {fileID: 4140774597986965270, guid: 957d23823ff549441bd758030801e7fc, type: 3}
   particle: {fileID: 6982263153641847612, guid: 36a3ddd9e9258474aa29a08939eeda45, type: 3}
   breakParticle: {fileID: 6982263153641847612, guid: 687464dcceeae1c479e8849ade29158d, type: 3}
+  objectDataList:
+  - DropObject: {fileID: 4140774597986965270, guid: 957d23823ff549441bd758030801e7fc, type: 3}
+    Chance: 0.9
+  - DropObject: {fileID: 4140774597986965270, guid: 3f48475c52ad44748b69f41385fe4c1d, type: 3}
+    Chance: 0.1
 --- !u!65 &8419142584776778797
 BoxCollider:
   m_ObjectHideFlags: 0
