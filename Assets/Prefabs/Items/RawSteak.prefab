@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 1277254021831242673}
   - component: {fileID: 5851044863939720990}
   - component: {fileID: 3103378388093939100}
+  - component: {fileID: 4063559230775442224}
   m_Layer: 0
   m_Name: RawSteak
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,3 +156,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4063559230775442224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6452987395473004570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5722cbfebd16341b994305a9abe2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Food
+  CookTime: 6
+  CanBeCoocked: 1
+  CookedPrefab: {fileID: 6840478870004302368, guid: 53f1ca76e07ae2b499c84dd34218d3ff, type: 3}

@@ -352,8 +352,11 @@ public class Placeable : MonoBehaviour
             {
                 if (col != null)
                 {
-                    col.enabled = true;
-                    col.isTrigger = false;
+                    if (col.name != "TriggerBox")
+                    {
+                        col.enabled = true;
+                        col.isTrigger = false;
+                    }
                 }
             }
         }

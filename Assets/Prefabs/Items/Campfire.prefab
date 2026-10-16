@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 3383903971689140787}
   - component: {fileID: 5691441853218016514}
   m_Layer: 0
-  m_Name: CoalAbsobtion
+  m_Name: TriggerBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,8 +490,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.58662033, y: 0.71138334, z: 0.5436554}
-  m_Center: {x: -0.24430847, y: 0.14430833, z: 0.09081268}
+  m_Size: {x: 0.7708187, y: 0.71138334, z: 0.7945709}
+  m_Center: {x: -0.21934795, y: 0.14430833, z: 0.07434845}
 --- !u!1001 &6838911922186947620
 PrefabInstance:
   m_ObjectHideFlags: 0
