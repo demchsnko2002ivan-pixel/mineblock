@@ -19,13 +19,15 @@ public class ItemPickup : MonoBehaviour
             rb.isKinematic = true;
         }
     }
-    void Pickup()
+    public void Pickup()
     {
+        Debug.Log("Item pickup");
         InventoryManager.Instance.Add(item);
         Destroy(gameObject);
     }
     private void OnMouseDown()
     {
-        Pickup();
+       // Debug.Log("Pick Item");
+       // Pickup();
     }
 }

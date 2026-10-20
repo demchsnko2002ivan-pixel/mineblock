@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979b74dc6d5de6b4eb16dfbf082b45a8, type: 3}
+  m_Name: CookedSteak
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  id: 11
+  itemName: Cooked Steak
+  value: 0
+  icon: {fileID: 21300000, guid: 2636b577393156f4d8a40f70c309b727, type: 3}
+  prefab: {fileID: 6840478870004302368, guid: 53f1ca76e07ae2b499c84dd34218d3ff, type: 3}
+  stack: 1
