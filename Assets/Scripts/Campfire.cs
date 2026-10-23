@@ -38,6 +38,11 @@ public class Campfire : InteractiveObject
                     food.Cook();
                 }
             }
+
+            if(hit.CompareTag("Player"))
+            {
+                Debug.Log("DamagePlayer");
+            }
         }
     }
 
